@@ -4,6 +4,7 @@
     import Navbar from './Navbar.svelte';
     import Loading from './Loading.svelte';
     import Background from './Background.svelte';
+    import Cursor from './Cursor.svelte';
 
     let isLoading = true;
 
@@ -11,7 +12,7 @@
         isLoading = false;
     }, 5000); // Duration of loading screen (5 seconds)
 </script>
-
+<Cursor>
 {#if isLoading}
     <Loading />
 {:else}
@@ -29,4 +30,8 @@
         position: relative;
         z-index: 1; /* Ensure the main content is above the background */
     }
+    *{
+		cursor: none !important;
+	}
 </style>
+</Cursor>
