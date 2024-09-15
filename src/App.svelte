@@ -4,17 +4,21 @@
     import Navbar from './Navbar.svelte';
     import Loading from './Loading.svelte';
     import Background from './Background.svelte';
-    import Cursor from './Cursor.svelte';
+    import Cursor from './Cursor.svelte'; // Import the custom cursor component
 
     let isLoading = true;
 
+    // Simulate a loading screen for 5 seconds
     setTimeout(() => {
         isLoading = false;
-    }, 5000); // Duration of loading screen (5 seconds)
+    }, 5000); 
 </script>
-<Cursor>
+
+<!-- Render the loading screen or main content based on isLoading -->
 {#if isLoading}
-    <Loading />
+    <div class="loading-container">
+        <Loading />
+    </div>
 {:else}
     <main>
         <Background />
@@ -25,13 +29,27 @@
     </main>
 {/if}
 
+<!-- Always render the custom cursor on top -->
+<Cursor />
+
 <style>
     main {
         position: relative;
         z-index: 1; /* Ensure the main content is above the background */
     }
-    *{
-		cursor: none !important;
-	}
+
+    .loading-container {
+        position: relative;
+        z-index: 2; /* Ensure loading screen is above the background */
+    }
+
+    /* Hide the default cursor globally */
+    * {
+        cursor: none !important;
+    }
+
+    /* Ensure the custom cursor has the highest z-index */
+    :global(.cursor-star, .trail) {
+        z-index: 10000; /* Make sure the custom cursor is above all content */
+    }
 </style>
-</Cursor>

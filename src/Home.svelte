@@ -1,4 +1,7 @@
 <style>
+    *{
+        cursor:none;
+    }
     @font-face {
         font-family: 'Futura';
         src: url('/FuturaLT-Bold.woff') format('woff');
