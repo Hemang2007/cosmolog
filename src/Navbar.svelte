@@ -302,6 +302,7 @@
 <div class="navbar">
   <div class="menu-items {showMenu ? 'show' : ''}">
     <a href="/" on:click={handleClick}>Home</a>
+    <a href="/Research.svelte" on:click={handleClick}>Research</a>
   </div>
   <div
     class="burger-menu {showMenu ? 'active' : ''}"
