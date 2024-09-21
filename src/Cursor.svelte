@@ -104,6 +104,12 @@
       transform: translate(-50%, -50%) scale(1);
     }
   }
+
+  @media (max-width: 768px) {
+    .cursor-wrapper {
+      display: none;
+    }
+  }
 </style>
 
 <!-- Conditionally render the cursor based on whether the element is clickable and add click animation -->

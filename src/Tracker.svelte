@@ -1,8 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import * as THREE from "three";
+  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-  let scene, camera, renderer, earth, starField, junkField;
+  let scene, camera, renderer, earth, starField, junkField, controls;
   let container; // Div container for Three.js renderer
 
   onMount(() => {
@@ -13,9 +14,15 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
+    // Load Earth texture with proper wrapping for poles
+    const earthTexture = new THREE.TextureLoader().load("/textures/earth.png", (texture) => {
+      texture.wrapS = THREE.ClampToEdgeWrapping; // Prevent wrapping horizontally
+      texture.wrapT = THREE.ClampToEdgeWrapping; // Prevent wrapping vertically
+      texture.minFilter = THREE.LinearFilter; // Smoother texture filtering for better quality
+    });
+
     // Create Earth sphere
-    const earthGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const earthTexture = new THREE.TextureLoader().load("/textures/earth_day.jpg");
+    const earthGeometry = new THREE.SphereGeometry(5, 64, 64); // Higher segments for better texture mapping
     const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
     earth = new THREE.Mesh(earthGeometry, earthMaterial);
     scene.add(earth);
@@ -62,12 +69,18 @@
     junkField = new THREE.Points(junkGeometry, junkMaterial);
     scene.add(junkField);
 
+    // Set up orbit controls for mouse interaction
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = true;
+    controls.maxDistance = 50; // Prevent zooming out too far
+    controls.minDistance = 10; // Prevent zooming in too close
+
     // Animation loop
     const animate = function () {
       requestAnimationFrame(animate);
-      earth.rotation.y += 0.001; // Rotate Earth
-      starField.rotation.y += 0.0005; // Rotate stars for dynamic background
-      junkField.rotation.y += 0.001; // Rotate junk around Earth
+      controls.update(); // Update orbit controls
       renderer.render(scene, camera);
     };
     animate();
@@ -79,11 +92,11 @@
   // Adjust renderer and camera on window resize
   function onWindowResize() {
     const aspectRatio = window.innerWidth / window.innerHeight;
-    
+
     // Adjust FOV based on aspect ratio
     camera.fov = aspectRatio < 1 ? 75 + (25 * (1 - aspectRatio)) : 75; // Increase FOV for narrow screens
     camera.aspect = aspectRatio;
-    
+
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
