@@ -186,6 +186,16 @@
     display: block;
   }
 
+  .logo {
+  margin-right: auto; /* Align logo to the left */
+}
+
+.logo-image {
+  height: 50px; /* Adjust the size as needed */
+  width: auto; /* Maintain aspect ratio */
+}
+
+
   @media screen and (max-width: 768px) {
     .burger-menu {
       display: block;
@@ -303,6 +313,9 @@
 </style>
 
 <div class="navbar">
+  <a href="/" on:click={handleClick} class="logo">
+    <img src="cosmologsymbol.png" alt="Logo" class="logo-image" />
+  </a>
   <div class="menu-items {showMenu ? 'show' : ''}">
     <a href="/" on:click={handleClick}>Home</a>
     <a href="/research" on:click={handleClick}>Research</a>
