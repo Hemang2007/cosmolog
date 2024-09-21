@@ -20,7 +20,7 @@
     container.appendChild(renderer.domElement);
 
     // Earth setup
-    const earthGeometry = new THREE.SphereGeometry(isMobile ? 6 : 5, 32, 32); // Slightly bigger Earth on mobile
+    const earthGeometry = new THREE.SphereGeometry(5, 32, 32);
     const earthTexture = new THREE.TextureLoader().load("/textures/earth_day.jpg");
     const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
     earth = new THREE.Mesh(earthGeometry, earthMaterial);
@@ -31,15 +31,13 @@
 
     // Starfield setup
     const starGeometry = new THREE.BufferGeometry();
-    const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: isMobile ? 0.5 : 0.7 }); // Smaller stars on mobile
+    const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.7 });
 
     const starVertices = [];
-    const starSpread = isMobile ? 1000 : 2000; // Reduce star spread for mobile
-
     for (let i = 0; i < 10000; i++) {
-      const x = THREE.MathUtils.randFloatSpread(starSpread);
-      const y = THREE.MathUtils.randFloatSpread(starSpread);
-      const z = THREE.MathUtils.randFloatSpread(starSpread);
+      const x = THREE.MathUtils.randFloatSpread(2000);
+      const y = THREE.MathUtils.randFloatSpread(2000);
+      const z = THREE.MathUtils.randFloatSpread(2000);
       starVertices.push(x, y, z);
     }
 
@@ -89,27 +87,12 @@
     });
   });
 
-  // Adjust camera, star spread, and renderer on window resize
   function onWindowResize() {
     const isMobile = window.innerWidth < 768;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.fov = isMobile ? 100 : 75; // Increase FOV for mobile
     camera.position.z = isMobile ? 35 : 20; // Adjust camera distance for mobile
     camera.updateProjectionMatrix();
-
-    // Recalculate the star spread when window resizes
-    const starGeometry = starField.geometry;
-    const starVertices = [];
-    const starSpread = isMobile ? 1000 : 2000;
-
-    for (let i = 0; i < 10000; i++) {
-      const x = THREE.MathUtils.randFloatSpread(starSpread);
-      const y = THREE.MathUtils.randFloatSpread(starSpread);
-      const z = THREE.MathUtils.randFloatSpread(starSpread);
-      starVertices.push(x, y, z);
-    }
-
-    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
 </script>
