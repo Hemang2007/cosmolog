@@ -285,6 +285,9 @@
     .dropdown-content.show {
       display: block;
     }
+    .navbar {
+    background-color: transparent; 
+  }
   }
 
   @keyframes fall {
