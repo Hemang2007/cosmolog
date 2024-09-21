@@ -34,7 +34,7 @@
     background-size: cover;
     transform: rotate(45deg);
     left: -50px; /* Ensure it starts off-screen on the left */
-    animation: shootRocket 5s linear forwards;
+    animation: shootRocket 3s linear forwards;
 }
 
 @keyframes shootRocket {
@@ -83,13 +83,13 @@
 }
 
 /* Apply animation delays based on letterAppearTimes */
-.loading span:nth-child(1) { animation-delay: 0.5s; }
-.loading span:nth-child(2) { animation-delay: 1s; }
-.loading span:nth-child(3) { animation-delay: 1.8s; }
-.loading span:nth-child(4) { animation-delay: 2.5s; }
-.loading span:nth-child(5) { animation-delay: 3s; }
-.loading span:nth-child(6) { animation-delay: 3.7s; }
-.loading span:nth-child(7) { animation-delay: 4.5s; }
+.loading span:nth-child(1) { animation-delay: 0.1s; }
+.loading span:nth-child(2) { animation-delay: 0.6s; }
+.loading span:nth-child(3) { animation-delay: 1.1s; }
+.loading span:nth-child(4) { animation-delay: 1.5s; }
+.loading span:nth-child(5) { animation-delay: 1.8s; }
+.loading span:nth-child(6) { animation-delay: 2.3s; }
+.loading span:nth-child(7) { animation-delay: 2.6s; }
 
 </style>
 

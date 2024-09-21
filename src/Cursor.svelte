@@ -3,6 +3,7 @@
 
   let cursorX = 0, cursorY = 0;
   let isClickable = false;
+  let isClicked = false; // Track if the mouse is clicked
 
   // Track mouse movement and update cursor position
   const handleMouseMove = (e) => {
@@ -18,9 +19,18 @@
     }
   };
 
-  // Set up event listener for mouse movement
+  // Handle mouse click to trigger animation
+  const handleClick = () => {
+    isClicked = true;
+    setTimeout(() => {
+      isClicked = false; // Reset click after animation
+    }, 300); // Duration of animation in ms
+  };
+
+  // Set up event listeners
   onMount(() => {
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
   });
 </script>
 
@@ -33,11 +43,11 @@
   /* Cursor wrapper with enough space for glow */
   .cursor-wrapper {
     position: absolute;
-    width: 80px; /* Larger size for the wrapper to contain the glow */
+    width: 80px;
     height: 80px;
-    pointer-events: none; /* Allow clicking through */
+    pointer-events: none;
     transform: translate(-50%, -50%);
-    z-index: 1000; /* High z-index to ensure it stays above other elements */
+    z-index: 1000;
   }
 
   /* Glow effect */
@@ -54,42 +64,57 @@
   }
 
   /* Meteorite cursor */
-  .custom-cursor {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px; /* Cursor stays 40px */
-    height: 40px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  /* Clickable cursor (when hovering over links or buttons) */
+  .custom-cursor,
   .clickable-cursor {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 40px; /* Cursor stays 40px */
+    width: 40px;
     height: 40px;
     background-size: contain;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    transition: transform 0.1s ease; /* Default transition */
   }
 
+  /* Cursor animation on click */
+  .clicked {
+    animation: click-animation 0.3s ease forwards;
+  }
+
+  /* Clickable cursor (when hovering over links or buttons) */
+  .clickable-cursor {
+    background-image: url('/mouse2.png');
+  }
+
+  .custom-cursor {
+    background-image: url('/mouse1.png');
+  }
+
+  /* Animation for cursor click effect */
+  @keyframes click-animation {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
 </style>
 
-<!-- Conditionally render the cursor based on whether the element is clickable -->
+<!-- Conditionally render the cursor based on whether the element is clickable and add click animation -->
 {#if isClickable}
   <div class="cursor-wrapper" style="left: {cursorX}px; top: {cursorY}px;">
     <div class="glow"></div>
-    <div class="clickable-cursor" style="background-image: url('/mouse2.png');"></div>
+    <div class="clickable-cursor {isClicked ? 'clicked' : ''}"></div>
   </div>
 {:else}
   <div class="cursor-wrapper" style="left: {cursorX}px; top: {cursorY}px;">
     <div class="glow"></div>
-    <div class="custom-cursor" style="background-image: url('/mouse1.png');"></div>
+    <div class="custom-cursor {isClicked ? 'clicked' : ''}"></div>
   </div>
 {/if}

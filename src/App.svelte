@@ -5,14 +5,15 @@
     import Loading from './Loading.svelte';
     import Background from './Background.svelte';
     import Cursor from './Cursor.svelte';
-    import Research from './Research.svelte'
+    import Research from './Research.svelte';
+    import Tracker from './Tracker.svelte';
 
     let isLoading = true;
 
     // Simulate a loading screen for 5 seconds
     setTimeout(() => {
         isLoading = false;
-    }, 5000); 
+    }, 3000); 
 </script>
 
 <!-- Render the loading screen or main content based on isLoading -->
@@ -25,8 +26,10 @@
         <Background />
         <Navbar />
         <Router>
+            <!-- Corrected the paths and removed ".svelte" from the route paths -->
             <Route path="/" component={Home} />
-            <Route path="/Reaserch.svelte" component={Research} />
+            <Route path="/research" component={Research} />
+            <Route path="/tracker" component={Tracker} />
         </Router>
     </main>
 {/if}

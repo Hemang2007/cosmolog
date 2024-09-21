@@ -1,40 +1,52 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
 
     let stars = [];
     let mouse = { x: 0, y: 0 };
-
     const numStars = 100;
 
-    // Generate random stars
-    for (let i = 0; i < numStars; i++) {
-        stars.push({
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            size: Math.random() * 2 + 1,
-            offsetX: (Math.random() - 0.5) * 10, // Add random offset for glowing effect
-            offsetY: (Math.random() - 0.5) * 10
-        });
+    // Function to generate random stars
+    function generateStars() {
+        stars = [];
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                size: Math.random() * 2 + 1,
+                offsetX: (Math.random() - 0.5) * 10,
+                offsetY: (Math.random() - 0.5) * 10
+            });
+        }
     }
 
+    // Handle mouse movement
     function handleMouseMove(event) {
         mouse.x = event.clientX;
         mouse.y = event.clientY;
     }
 
-    // Animation loop
+    // Animate stars to follow the mouse
     function animate() {
         stars.forEach(star => {
-            // Update star position to follow mouse
             star.x += (mouse.x - star.x) * 0.01;
             star.y += (mouse.y - star.y) * 0.01;
         });
-
         requestAnimationFrame(animate);
     }
 
+    // Handle window resize
+    function handleResize() {
+        generateStars(); // Regenerate stars on resize to match new window size
+    }
+
     onMount(() => {
+        generateStars();
         animate();
+        window.addEventListener('resize', handleResize); // Add resize listener
+    });
+
+    onDestroy(() => {
+        window.removeEventListener('resize', handleResize); // Clean up on destroy
     });
 </script>
 
@@ -65,6 +77,7 @@
     }
 </style>
 
+<!-- Background container with mouse movement handler -->
 <div class="background" on:mousemove={handleMouseMove}>
     {#each stars as star}
         <div class="star" style={`top: ${star.y}px; left: ${star.x}px; width: ${star.size}px; height: ${star.size}px;`}></div>

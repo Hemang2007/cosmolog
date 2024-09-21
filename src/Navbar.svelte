@@ -88,7 +88,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(51, 51, 51, 0);
+    background-color: rgb(0, 0, 0);
     color: white;
     padding: 10px 20px;
     position: relative;
@@ -302,7 +302,8 @@
 <div class="navbar">
   <div class="menu-items {showMenu ? 'show' : ''}">
     <a href="/" on:click={handleClick}>Home</a>
-    <a href="/Research.svelte" on:click={handleClick}>Research</a>
+    <a href="/research" on:click={handleClick}>Research</a>
+    <a href="/tracker" on:click={handleClick}>3D Tracker</a>
   </div>
   <div
     class="burger-menu {showMenu ? 'active' : ''}"
