@@ -7,6 +7,7 @@
     import Cursor from './Cursor.svelte';
     import Research from './Research.svelte';
     import Tracker from './Tracker.svelte';
+    import Blog from './Blog.svelte';
 
     let isLoading = true;
 
@@ -30,6 +31,7 @@
             <Route path="/" component={Home} />
             <Route path="/research" component={Research} />
             <Route path="/tracker" component={Tracker} />
+            <Route path="/blog" component={Blog} />
         </Router>
     </main>
 {/if}
