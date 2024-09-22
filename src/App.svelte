@@ -8,6 +8,7 @@
     import Research from './Research.svelte';
     import Tracker from './Tracker.svelte';
     import Blog from './Blog.svelte';
+    import Campaign from './Campaign.s';
 
     let isLoading = true;
 
@@ -32,6 +33,7 @@
             <Route path="/research" component={Research} />
             <Route path="/tracker" component={Tracker} />
             <Route path="/blog" component={Blog} />
+            <Route path="/campaign" component={Campaign} />
         </Router>
     </main>
 {/if}

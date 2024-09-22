@@ -146,8 +146,16 @@
   }
 
   .menu-items a:hover {
-    animation: neon-glow 2s ease-in-out 1s infinite alternate;
+    animation: neon-glow 1s ease-in-out 0.1s infinite alternate;
   }
+
+  .logo:hover .logo-image {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
+          drop-shadow(0 0 10px rgba(255, 255, 255, 0.6))
+          drop-shadow(0 0 20px rgb(255, 255, 255))
+          drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+  animation: neon-glow-logo 1.5s ease-in-out infinite alternate;
+}
 
   @keyframes neon-glow {
     0% {
@@ -157,6 +165,17 @@
       text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.8);
     }
   }
+
+  @keyframes neon-glow-logo {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgb(255, 255, 255))
+            drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+  }
+}
 
   /* Dropdown hover animation */
   .dropdown:hover .dropbtn {
@@ -272,6 +291,7 @@
     <a href="/research" on:click={handleClick}>Research</a>
     <a href="/blog" on:click={handleClick}>Blog</a>
     <a href="/tracker" on:click={handleClick}>3D Tracker</a>
+    <a href="/campaign" on:click={handleClick}>Campaign</a>
   </div>
   <div
     class="burger-menu {showMenu ? 'active' : ''}"
