@@ -3,12 +3,11 @@
     import Home from './Home.svelte';
     import Navbar from './Navbar.svelte';
     import Loading from './Loading.svelte';
-    import Background from './Background.svelte';
     import Cursor from './Cursor.svelte';
     import Research from './Research.svelte';
     import Tracker from './Tracker.svelte';
     import Blog from './Blog.svelte';
-    import Campaign from './Campaign.s';
+    import Campaign from './Campaign.svelte';
 
     let isLoading = true;
 
@@ -25,7 +24,6 @@
     </div>
 {:else}
     <main>
-        <Background />
         <Navbar />
         <Router>
             <!-- Corrected the paths and removed ".svelte" from the route paths -->
