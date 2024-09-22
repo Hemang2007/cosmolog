@@ -38,7 +38,7 @@
 
     // Create Earth sphere with placeholder texture
     const earthGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const placeholderTexture = textureLoader.load("/textures/earth-low-res.png"); // Low-res initial texture
+    const placeholderTexture = textureLoader.load("/textures/earth_lowres.png"); // Low-res initial texture
     const earthMaterial = new THREE.MeshBasicMaterial({ map: placeholderTexture });
     earth = new THREE.Mesh(earthGeometry, earthMaterial);
     scene.add(earth);

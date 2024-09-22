@@ -88,7 +88,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0); /* Keep navbar black */
     color: white;
     padding: 10px 20px;
     position: relative;
@@ -98,26 +98,14 @@
     z-index: 1000;
   }
 
-  .burger-menu {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 35px;
-    position: fixed;
-    right: 15px;
-    top: 10px;
-    z-index: 1200;
+  /* Logo on the left */
+  .logo {
+    margin-right: auto; /* Align logo to the left */
   }
 
-  .burger-menu div {
-    width: 100%;
-    height: 6px;
-    background-color: white;
-    margin: 3px 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+  .logo-image {
+    height: 50px; /* Adjust the size of the logo */
+    width: auto; /* Maintain aspect ratio */
   }
 
   .menu-items {
@@ -131,74 +119,96 @@
     padding: 10px 15px;
     text-decoration: none;
     position: relative;
+    overflow: hidden; /* Required for underline animation */
+    transition: color 0.3s ease;
+  }
+
+  /* Neon underline animation on hover */
+  .menu-items a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: rgba(0, 255, 255, 0.8);
+    transition: width 0.4s ease, left 0.4s ease;
+  }
+
+  .menu-items a:hover::before {
+    width: 100%;
+    left: 0;
+  }
+
+  /* Neon color change on hover */
+  .menu-items a:hover {
+    color: rgba(0, 255, 255, 0.8);
   }
 
   .menu-items a:hover {
-    transition: transform 0.3s;
-    transform: scale(1.1);
-    background-color: rgba(85, 85, 85, 0.74);
-    border-radius: 8px;
+    animation: neon-glow 2s ease-in-out 1s infinite alternate;
   }
 
+  @keyframes neon-glow {
+    0% {
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.6);
+    }
+    100% {
+      text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.8);
+    }
+  }
+
+  /* Dropdown hover animation */
   .dropdown:hover .dropbtn {
     background-color: rgba(85, 85, 85, 0.74);
     border-radius: 8px;
   }
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-  }
-
-  .dropbtn {
-    display: flex;
-    align-items: center;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #222;
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    margin-top: 0;
-    font-size: 14px;
-    border-radius: 8px;
-    word-spacing: 2px;
-  }
-
-  .dropdown-content a {
-    color: white;
-    padding: 10px 12px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    position: relative;
-  }
-
+  /* Neon glow for dropdown links */
   .dropdown-content a:hover {
-    background-color: rgba(70, 70, 70, 0);
+    background-color: rgba(85, 85, 85, 0.8);
+    color: rgba(0, 255, 255, 0.8);
   }
 
-  .dropdown-content.show {
-    display: block;
+  /* Burger menu styling */
+  .burger-menu {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 25px;
+    position: fixed;
+    right: 15px;
+    top: 10px;
+    z-index: 1200;
   }
 
-  .logo {
-  margin-right: auto; /* Align logo to the left */
-}
+  .burger-menu div {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 6px auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
 
-.logo-image {
-  height: 50px; /* Adjust the size as needed */
-  width: auto; /* Maintain aspect ratio */
-}
+  .burger-menu.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-1vw, 1vw);
+  }
 
+  .burger-menu.active div:nth-child(2) {
+    opacity: 0;
+  }
 
+  .burger-menu.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-1vw, -1vw);
+  }
+
+  /* Responsive Styles */
   @media screen and (max-width: 768px) {
     .burger-menu {
-      display: block;
+      display: block; /* Burger menu only visible on smaller screens */
     }
 
     .menu-items {
@@ -239,14 +249,6 @@
       background-color: #555;
     }
 
-    .burger-menu div {
-      width: 40px;
-      height: 5px;
-      background-color: white;
-      margin: 5px auto;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
     .burger-menu.active div:nth-child(1) {
       transform: rotate(-45deg) translate(-8px, 8px);
     }
@@ -257,57 +259,6 @@
 
     .burger-menu.active div:nth-child(3) {
       transform: rotate(45deg) translate(-8px, -8px);
-    }
-
-    .dropdown {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-right: 8px;
-      align-self: center;
-    }
-
-    .menu-items a:hover {
-      transform: scale(1.1);
-      background-color: rgba(85, 85, 85, 0.27);
-      border-radius: 8px;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: relative;
-      background-color: #222;
-      min-width: 100%;
-      box-shadow: none;
-      z-index: 1;
-      margin-top: 15px;
-      font-size: 18px;
-      right: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .dropdown-content a {
-      text-align: center;
-      font-size: 28px;
-    }
-
-    .dropdown-content.show {
-      display: block;
-    }
-    .navbar {
-    background-color: transparent; 
-  }
-  }
-
-  @keyframes fall {
-    0% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
     }
   }
 </style>
