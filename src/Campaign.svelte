@@ -47,9 +47,9 @@
       background-color: black; /* Set background to black for contrast */
       color: white; /* Set default text color to white */
     }
-
+    
     .wrapper {
-    min-height: 100vh; /* Ensure it takes full height of viewport */
+    max-height: 100vh; /* Ensure it takes full height of viewport */
     padding: 2rem; /* Add padding */
   }
     .counter {

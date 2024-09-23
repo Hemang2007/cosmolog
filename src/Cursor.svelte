@@ -1,126 +1,84 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
 
-  let cursorX = 0, cursorY = 0;
-  let isClickable = false;
-  let isClicked = false; // Track if the mouse is clicked
+  let isClicking = false;
+  let isMobile = false;
+  let isHoveringClickable = false;
 
-  // Track mouse movement and update cursor position
-  const handleMouseMove = (e) => {
-    cursorX = e.clientX;
-    cursorY = e.clientY;
+  const updateCursor = (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  };
 
-    // Check if the hovered element is clickable
-    const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
-    if (hoveredElement && (hoveredElement.tagName === 'A' || hoveredElement.tagName === 'BUTTON')) {
-      isClickable = true; // Change cursor to clickable style
-    } else {
-      isClickable = false; // Use default style
+  const handleMouseDown = () => {
+    isClicking = true;
+    setTimeout(() => {
+      isClicking = false;
+    }, 200); // Control the time for how long the zoom effect lasts
+  };
+
+  const handleTouchStart = () => {
+    isMobile = true;
+    const cursor = document.querySelector('.custom-cursor');
+    cursor.style.display = 'none';
+  };
+
+  const handleMouseEnter = (e) => {
+    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.classList.contains('clickable')) {
+      isHoveringClickable = true;
     }
   };
 
-  // Handle mouse click to trigger animation
-  const handleClick = () => {
-    isClicked = true;
-    setTimeout(() => {
-      isClicked = false; // Reset click after animation
-    }, 300); // Duration of animation in ms
+  const handleMouseLeave = () => {
+    isHoveringClickable = false;
   };
 
-  // Set up event listeners
   onMount(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("click", handleClick);
+    document.addEventListener('mousemove', updateCursor);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('mouseover', handleMouseEnter);
+    document.addEventListener('mouseout', handleMouseLeave);
+
+    return () => {
+      document.removeEventListener('mousemove', updateCursor);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('mouseover', handleMouseEnter);
+      document.removeEventListener('mouseout', handleMouseLeave);
+    };
   });
 </script>
 
 <style>
-  /* Hide default cursor */
-  * {
-    cursor: none;
-  }
-
-  /* Cursor wrapper with enough space for glow */
-  .cursor-wrapper {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-  }
-
-  /* Glow effect */
-  .glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: 0.9;
-  }
-
-  /* Meteorite cursor */
-  .custom-cursor,
-  .clickable-cursor {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    transition: transform 0.1s ease; /* Default transition */
-  }
-
-  /* Cursor animation on click */
-  .clicked {
-    animation: click-animation 0.3s ease forwards;
-  }
-
-  /* Clickable cursor (when hovering over links or buttons) */
-  .clickable-cursor {
-    background-image: url('/mouse2.png');
-  }
-
   .custom-cursor {
-    background-image: url('/mouse1.png');
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background: url('/mouse1.png') no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: transform 0.2s ease;
   }
 
-  /* Animation for cursor click effect */
-  @keyframes click-animation {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-    }
+  .clicking {
+    transform: translate(-50%, -50%) scale(1.3); /* Slight zoom in when clicking */
   }
 
-  @media (max-width: 768px) {
-    .cursor-wrapper {
-      display: none;
-    }
+  .hovering-clickable {
+    background: url('/mouse2.png') no-repeat center center; /* New image for clickable elements */
+    background-size: contain;
+  }
+
+  .hide-default-cursor {
+    cursor: none !important;
   }
 </style>
 
-<!-- Conditionally render the cursor based on whether the element is clickable and add click animation -->
-{#if isClickable}
-  <div class="cursor-wrapper" style="left: {cursorX}px; top: {cursorY}px;">
-    <div class="glow"></div>
-    <div class="clickable-cursor {isClicked ? 'clicked' : ''}"></div>
-  </div>
-{:else}
-  <div class="cursor-wrapper" style="left: {cursorX}px; top: {cursorY}px;">
-    <div class="glow"></div>
-    <div class="custom-cursor {isClicked ? 'clicked' : ''}"></div>
-  </div>
-{/if}
+<div class="hide-default-cursor">
+  <div class="custom-cursor {isClicking ? 'clicking' : ''} {isHoveringClickable ? 'hovering-clickable' : ''}"></div>
+  <slot></slot>
+</div>

@@ -30,13 +30,17 @@
     }
 
     :global(body) {
-        height: 100vh; /* Keeps the body covering the full viewport height */
+        background-image: url('/bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
         margin: 0;
         display: flex;
         flex-direction: column;
         padding: 0;
         background-attachment: fixed;
-        font-family: MBFSpace;
+        font-family: 'MBFSpace';
     }
 
     .logo-container {
@@ -53,7 +57,7 @@
 
     .logo {
         width: 100%; /* Full width with a maximum width */
-        max-width: 500px; /* Maximum width to ensure it doesn't grow too large */
+        max-width: 450px; /* Maximum width to ensure it doesn't grow too large */
         height: auto; /* Maintain aspect ratio */
         margin-bottom: 15px; /* Adjusted margin */
     }

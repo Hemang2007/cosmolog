@@ -7,8 +7,8 @@
   let container;
   let junkSpeed = 0.0001;
   const junkCount = 50000;
-  const minRadius = 6.5;
-  const maxRadius = 10;
+  const minRadius = 5.12;
+  const maxRadius = 6.75;
   let controls;
   let isTextureLoaded = false;
 
@@ -98,7 +98,7 @@
     controls.dampingFactor = 0.25;
     controls.enableZoom = true;
     controls.maxDistance = 50;
-    controls.minDistance = 15;
+    controls.minDistance = 10;
 
     const animate = function () {
       requestAnimationFrame(animate);
@@ -152,6 +152,7 @@
     overflow: hidden;
     margin: 0;
     background-color: black;
+    position: relative;
   }
 
   .loading-overlay {
