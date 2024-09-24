@@ -60,7 +60,20 @@
         max-width: 450px; /* Maximum width to ensure it doesn't grow too large */
         height: auto; /* Maintain aspect ratio */
         margin-bottom: 15px; /* Adjusted margin */
+        animation: glow 20s infinite ease-in-out;
     }
+
+    @keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+    }
+    100% {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+    }
+}
 
     .title {
         font-size: 60px; /* Responsive font size */
@@ -68,7 +81,11 @@
         color: white; /* Set text color to white */
         word-spacing: 2vw; /* Responsive word spacing */
         margin: 15px 0; /* Adjusted margin */
+        position: relative;
+        overflow: hidden;
     }
+
+    
 
     @media (max-width: 768px) {
         .logo {
@@ -102,6 +119,6 @@
 </style>
 
 <div class="logo-container">
-    <img src="/cosmologo.png" alt="Logo" class="logo">
+    <img src="/cosmolog2.png" alt="Logo" class="logo">
     <div class="title">INFINITY BECKONS US</div>
 </div>
