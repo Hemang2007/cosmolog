@@ -44,7 +44,6 @@
   
   <style>
     :global(body) {
-      background-color: black; /* Set background to black for contrast */
       color: white; /* Set default text color to white */
     }
     

@@ -8,7 +8,7 @@
     import Tracker from './Tracker.svelte';
     import Blog from './Blog.svelte';
     import Campaign from './Campaign.svelte';
-
+    import Background from './Background.svelte';
     let isLoading = true;
 
     // Simulate a loading screen for 5 seconds
@@ -24,8 +24,9 @@
     </div>
 {:else}
     <main>
+        <Background />
         <Navbar />
-        <Router>
+        <Router>        
             <!-- Corrected the paths and removed ".svelte" from the route paths -->
             <Route path="/" component={Home} />
             <Route path="/research" component={Research} />

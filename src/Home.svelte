@@ -30,7 +30,7 @@
     }
 
     :global(body) {
-        background-image: url('/bg.jpg');
+        /* background-image: url('/bg.jpg'); */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -119,6 +119,6 @@
 </style>
 
 <div class="logo-container">
-    <img src="/cosmolog2.png" alt="Logo" class="logo">
+    <img src="/logolong.png" alt="Logo" class="logo">
     <div class="title">INFINITY BECKONS US</div>
 </div>
