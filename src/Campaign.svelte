@@ -80,7 +80,7 @@
     }
 
     .counter {
-      font-size: 2.5rem; /* Smaller font size on phones */
+      font-size: 2rem; /* Smaller font size on phones */
     }
 
     .tag {
@@ -88,7 +88,7 @@
     }
 
     .plus {
-      font-size: 2.5rem; /* Smaller plus sign */
+      font-size: 1.5rem; /* Smaller plus sign */
     }
   }
 </style>
