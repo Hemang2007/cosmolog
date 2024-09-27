@@ -290,6 +290,7 @@
     </a>
     <div class="menu-items {showMenu ? 'show' : ''}">
       <a href="/" on:click={handleClick}>Home</a>
+      <a href="/about" on:click={handleClick}>About</a>
       <a href="/research" on:click={handleClick}>Research</a>
       <a href="/blog" on:click={handleClick}>Blog</a>
       <a href="/tracker" on:click={handleClick}>3D Tracker</a>

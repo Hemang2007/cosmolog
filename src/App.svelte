@@ -9,6 +9,7 @@
     import Blog from './Blog.svelte';
     import Campaign from './Campaign.svelte';
     import Background from './Background.svelte';
+    import About from './About.svelte';
     let isLoading = true;
 
     // Simulate a loading screen for 5 seconds
@@ -33,6 +34,7 @@
             <Route path="/tracker" component={Tracker} />
             <Route path="/blog" component={Blog} />
             <Route path="/campaign" component={Campaign} />
+            <Route path="/about" component={About} />
         </Router>
     </main>
 {/if}
