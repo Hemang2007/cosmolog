@@ -120,5 +120,5 @@
 
 <div class="logo-container">
     <img src="/logolong.png" alt="Logo" class="logo">
-    <div class="title">INFINITY BECKONS US</div>
+    <div class="title">INFINITY BECKONS</div>
 </div>
