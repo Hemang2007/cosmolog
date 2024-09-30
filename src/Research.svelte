@@ -15,7 +15,7 @@
 <div class="gallery">
   {#each items as item}
     <div class="item" on:click={() => openPDF(item.pdf)}>
-      <img src={item.img} alt="Study Guide" />
+      <img src={item.img} alt="research" />
       <div class="overlay">
         <div class="text">
           <h3>{item.title}</h3>
@@ -45,7 +45,6 @@
     width: 220px; /* Fixed width for the poster */
     height: 320px; /* Height for a rectangular shape */
     border-radius: 10px;
-    overflow: hidden;
     transition: transform 0.3s;
   }
 

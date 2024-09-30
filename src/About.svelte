@@ -27,7 +27,7 @@
       margin-bottom: 1rem; /* Spacing below the title */
     }
   
-    p {
+    pre {
       line-height: 1.6; /* Line height for readability */
       font-family: Futura;
       font-size: 20px;
@@ -37,9 +37,12 @@
   <div class="container">
     <div class="translucent-box">
       <h1>Who Are We?</h1>
-      <p>
+      <pre>
         Just a bunch of pookies, pookieing around!
-      </p>
+        POOKIE 1 - Hemang Domadia
+        POOKIE 2 - Serene Lydia S.
+        POOKIE 3 - Samaira (idk her last name hehehe)
+      </pre>
     </div>
   </div>
   
