@@ -41,7 +41,7 @@
         Just a bunch of pookies, pookieing around!
         POOKIE 1 - Hemang Domadia
         POOKIE 2 - Serene Lydia S.
-        POOKIE 3 - Samaira (idk her last name hehehe)
+        POOKIE 3 - Samaira Jain
       </pre>
     </div>
   </div>
